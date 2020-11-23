@@ -9,7 +9,6 @@ tweet_df <- search_tweets("Pantanal", n = 2000,
                           include_rts = FALSE,lang="en")
 
 
-
 #### let's to do a clean in the tweets text
 
 
@@ -33,13 +32,14 @@ tweet_df <- tweet_df[!duplicated(tweet_df$text),]  ### remove duplicated tweets
 tweet_df$tweet_id<-seq(from=1,length(tweet_df$user_id))
 
 ### one option is to join alll data in a unique text
+### now I will combine all rows in just one great text
+library(tidyr)
 full_text<-tibble(line=1:length(tweet_df$text),text=tweet_df$text)
 full_text
 
 # but in this case i will not use it
 
-### now I will combine all rows in just one great text
-library(tidyr)
+
 
 ### tokenization (break text into rows with just one word)
 library(tidytext)
@@ -329,3 +329,4 @@ op_word_counts  %>%
   theme(strip.text.x = element_text(color="black",size=20))+
   theme(strip.background =element_rect(fill="#CCCCCC",colour="black"))+
   theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank())
+
